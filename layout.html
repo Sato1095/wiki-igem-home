@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://static.igem.wiki/common/icons/favicons/igem-2022.svg"/>
+    <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
+
+    <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static', filename = 'bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename = 'style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='members.css') }}">
+
+    <title>{% block title %}{% endblock %} | Thessaloniki - iGEM 2026</title>
+
+</head>
+<body>
+  <!-- Navigation -->
+  {% include 'menu.html' %}
+
+  <!-- Header -->
+   <header class="bg-hero py-5 mb-5">848dc6
+    <svg class="hero-line" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+ <path class="line-lime" d="M0,240 C360,140 720,300 1080,200 C1260,150 1380,210 1440,190"
+        fill="none" stroke="#848dc6" stroke-width="2.5" stroke-linecap="round"/>
+<path class="line-lav" d="M1440,210 C1200,250 1040,205 760,180 C500,150 300,260 0,200"
+      fill="none" stroke="#dfee87" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-lg-12">
+          <h1 class="display-4 text-white mt-5 mb-2">{{ self.title() }}</h1>
+	        <p class="lead mb-5 text-white-50">{% block lead %}{% endblock %}</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <div class="container">
+    {% block page_content %}{% endblock %}
+  </div>
+
+  <!-- Footer: MUST mention license AND have a link to team wiki's repository on gitlab.igem.org -->
+  {% include 'footer.html' %}
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="{{ url_for('static', filename = 'bootstrap.bundle.min.js') }}"></script>
+  
+</body>
+</html>
