@@ -1,0 +1,436 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+{% block lead %}{% endblock %}
+
+{% block page_content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='mechanism.css') }}">
+
+<div class="home-page hm">
+
+  <!-- =====================================================================
+       1 · HERO
+       ===================================================================== -->
+  <section class="hm-hero">
+    <div class="hm-hero-glow" aria-hidden="true"></div>
+
+    <div class="hm-hero-inner">
+      <img class="hm-hero-logo"
+           src="{{ 'https://static.igem.wiki/teams/6118/wiki/aeth3r-logo-animated-1.svg' }}"
+           width="2398" height="1016" alt="Aeth3r">
+
+      <h1 class="hm-hero-expand">
+        <b>A</b>poptotic <b>E</b>limination of <b>T</b>umor-promoting proteins via
+        <b>H</b>arnessed E<b>3</b> ligase <b>R</b>ecruitment
+      </h1>
+
+      <p class="hm-hero-lead">
+        iGEM Thessaloniki is designing a peptide degrader that hands a tumor-promoting
+        protein to the cell&rsquo;s own disposal machinery &mdash; instead of trying to block it.
+      </p>
+
+      <div class="hm-hero-cta">
+        <a class="hm-btn hm-btn-primary" href="#mechanism">See how it works</a>
+        <a class="hm-btn" href="{{ url_for('pages', page='description') }}">Read the project</a>
+      </div>
+    </div>
+
+    <a class="hm-cue" href="#why" aria-label="Skip to why we chose non-small cell lung cancer">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16.6 4.4 9l1.5-1.5L12 13.6l6.1-6.1L19.6 9z"/></svg>
+    </a>
+  </section>
+
+  <!-- =====================================================================
+       2 · WHY NSCLC
+       NOTE for the team: these three figures still need their sources cited
+       (add the reference next to each card, or link a references section).
+       ===================================================================== -->
+  <section class="hm-band hm-nsclc" id="why">
+    <img class="hm-wave hm-wave-top"
+         src="{{ 'https://static.igem.wiki/teams/6118/wiki/home/lightblue-1.svg' }}" alt="" aria-hidden="true">
+
+    <div class="hm-nsclc-inner">
+      <h2 class="hm-band-title">Non-small cell lung cancer</h2>
+      <p class="hm-band-lead">Where we chose to start &mdash; and the numbers behind that choice.</p>
+
+      <div class="hm-cards">
+
+        <button type="button" class="hm-flip" aria-pressed="false">
+          <span class="hm-flip-inner">
+            <span class="hm-flip-face hm-flip-front">
+              <span class="hm-flip-text"><b>NSCLC</b> accounts for approximately <b>85%</b>
+                of all lung cancer cases, making it the dominant subtype</span>
+              <span class="hm-flip-hint">Tap for the figure</span>
+            </span>
+            <span class="hm-flip-face hm-flip-back">
+              <span class="hm-stat">85%</span>
+              <span class="hm-stat-label">of lung cancer cases</span>
+              <span class="hm-dots" data-filled="85" aria-hidden="true"></span>
+            </span>
+          </span>
+        </button>
+
+        <button type="button" class="hm-flip" aria-pressed="false">
+          <span class="hm-flip-inner">
+            <span class="hm-flip-face hm-flip-front">
+              <span class="hm-flip-text">In <b>2026</b>, an estimated <b>~229,410</b>
+                new lung cancer cases are projected in the US</span>
+              <span class="hm-flip-hint">Tap for the figure</span>
+            </span>
+            <span class="hm-flip-face hm-flip-back">
+              <span class="hm-stat hm-stat-sm">~229,410</span>
+              <span class="hm-stat-label">projected new cases in 2026</span>
+              <span class="hm-bars" aria-hidden="true">
+                <i style="--h:34%"></i><i style="--h:52%"></i><i style="--h:68%"></i>
+                <i style="--h:81%"></i><i style="--h:100%"></i>
+              </span>
+            </span>
+          </span>
+        </button>
+
+        <button type="button" class="hm-flip" aria-pressed="false">
+          <span class="hm-flip-inner">
+            <span class="hm-flip-face hm-flip-front">
+              <span class="hm-flip-text">The overall 5-year relative survival rate for NSCLC
+                is <b>32%</b>, ranging from <b>67%</b> for localized disease to <b>12%</b>
+                for distant&nbsp;/&nbsp;metastatic disease.</span>
+              <span class="hm-flip-hint">Tap for the figure</span>
+            </span>
+            <span class="hm-flip-face hm-flip-back">
+              <span class="hm-stat">32%</span>
+              <span class="hm-stat-label">5-year relative survival</span>
+              <span class="hm-dots" data-filled="32" aria-hidden="true"></span>
+            </span>
+          </span>
+        </button>
+
+      </div>
+    </div>
+
+    <img class="hm-wave hm-wave-bottom"
+         src="{{ 'https://static.igem.wiki/teams/6118/wiki/home/light-blue-2.svg' }}" alt="" aria-hidden="true">
+  </section>
+
+  <!-- =====================================================================
+       3 · MECHANISM  ("the video")
+       Static markup renders a readable diagram on its own; mechanism.js
+       turns it into a five-step animation.
+       ===================================================================== -->
+  <section class="mech-section" id="mechanism">
+    <div class="mech-head">
+      <p class="mech-eyebrow">The mechanism</p>
+      <h2 class="mech-title">Forced ubiquitination of a <em>protein of interest</em></h2>
+      <p class="mech-sub">
+        Healthy cells already destroy proteins they no longer need. Aeth3r borrows that
+        machinery and points it at a target of our choosing. Here is the whole route, step by step.
+      </p>
+    </div>
+
+    <div class="mech-shell" id="mech" tabindex="-1">
+
+      <div class="mech-stage">
+        <svg class="mech-svg" id="mech-svg" viewBox="0 0 1200 560"
+             preserveAspectRatio="xMidYMid meet" role="img"
+             aria-label="Diagram of targeted protein degradation by a peptide PROTAC">
+
+          <defs>
+            <radialGradient id="mech-gPoi" cx="36%" cy="28%" r="82%">
+              <stop offset="0%" stop-color="#424b80"/>
+              <stop offset="55%" stop-color="#242b55"/>
+              <stop offset="100%" stop-color="#141937"/>
+            </radialGradient>
+            <radialGradient id="mech-gE3" cx="38%" cy="28%" r="84%">
+              <stop offset="0%" stop-color="#dde6ef"/>
+              <stop offset="56%" stop-color="#b6c7d8"/>
+              <stop offset="100%" stop-color="#8ea3ba"/>
+            </radialGradient>
+            <radialGradient id="mech-gE2" cx="38%" cy="28%" r="84%">
+              <stop offset="0%" stop-color="#dcdff3"/>
+              <stop offset="58%" stop-color="#aab1de"/>
+              <stop offset="100%" stop-color="#848dc6"/>
+            </radialGradient>
+            <radialGradient id="mech-gUb" cx="38%" cy="28%" r="84%">
+              <stop offset="0%" stop-color="#f6fad6"/>
+              <stop offset="56%" stop-color="#dfee87"/>
+              <stop offset="100%" stop-color="#bdcf5c"/>
+            </radialGradient>
+            <radialGradient id="mech-gPep" cx="38%" cy="28%" r="84%">
+              <stop offset="0%" stop-color="#a9b0dd"/>
+              <stop offset="60%" stop-color="#848dc6"/>
+              <stop offset="100%" stop-color="#626ba6"/>
+            </radialGradient>
+            <linearGradient id="mech-gProte" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e2eaf2"/>
+              <stop offset="50%" stop-color="#b6c7d8"/>
+              <stop offset="100%" stop-color="#8da1b9"/>
+            </linearGradient>
+            <linearGradient id="mech-gCap" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#cfdae6"/>
+              <stop offset="100%" stop-color="#7e93ac"/>
+            </linearGradient>
+            <filter id="mech-sh" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#141937" flood-opacity="0.18"/>
+            </filter>
+            <filter id="mech-shS" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#141937" flood-opacity="0.16"/>
+            </filter>
+          </defs>
+
+          <g id="mech-world">
+
+            <!-- cytoplasmic background particles -->
+            <g id="mech-amb" aria-hidden="true"></g>
+
+            <!-- degradation products -->
+            <g id="mech-debris" aria-hidden="true"></g>
+
+            <!-- the unfolded POI being threaded in -->
+            <path id="mech-strand" fill="none" stroke="#2b3360" stroke-width="11"
+                  stroke-linecap="round" opacity="0"/>
+
+            <!-- 26S proteasome -->
+            <g id="mech-proteasome" transform="translate(872 340)">
+              <path d="M -94,-68 L -134,-53 Q -156,-45 -156,-23 L -156,23 Q -156,45 -134,53 L -94,68 Z"
+                    fill="url(#mech-gCap)" filter="url(#mech-sh)"/>
+              <path d="M 94,-68 L 134,-53 Q 156,-45 156,-23 L 156,23 Q 156,45 134,53 L 94,68 Z"
+                    fill="url(#mech-gCap)" filter="url(#mech-sh)"/>
+              <path d="M -94,-68 L -134,-53 Q -156,-45 -156,-23 L -156,23 Q -156,45 -134,53 L -94,68 Z"
+                    fill="none" stroke="#6f859f" stroke-width="1.8" opacity=".4"/>
+              <path d="M 94,-68 L 134,-53 Q 156,-45 156,-23 L 156,23 Q 156,45 134,53 L 94,68 Z"
+                    fill="none" stroke="#6f859f" stroke-width="1.8" opacity=".4"/>
+              <rect x="-96" y="-80" width="192" height="160" rx="26"
+                    fill="url(#mech-gProte)" filter="url(#mech-sh)"/>
+              <line x1="-48" y1="-72" x2="-48" y2="72" stroke="#7f93ad" stroke-width="3" opacity=".55"/>
+              <line x1="0"   y1="-74" x2="0"   y2="74" stroke="#7f93ad" stroke-width="4" opacity=".6"/>
+              <line x1="48"  y1="-72" x2="48"  y2="72" stroke="#7f93ad" stroke-width="3" opacity=".55"/>
+              <rect x="-96" y="-80" width="192" height="160" rx="26"
+                    fill="none" stroke="#ffffff" stroke-width="1.6" opacity=".5"/>
+              <g fill="#ffffff" opacity=".42">
+                <circle cx="-116" cy="-31" r="9"/><circle cx="-132" cy="-1" r="9"/><circle cx="-116" cy="29" r="9"/>
+                <circle cx="116" cy="-31" r="9"/><circle cx="132" cy="-1" r="9"/><circle cx="116" cy="29" r="9"/>
+              </g>
+              <ellipse cx="-156" cy="0" rx="15" ry="41" fill="#141937"/>
+              <ellipse cx="-156" cy="0" rx="15" ry="41" fill="none" stroke="#848dc6" stroke-width="2.8" opacity=".95"/>
+              <text class="mech-lbl" y="128">26S proteasome</text>
+            </g>
+
+            <!-- protein of interest -->
+            <g id="mech-poi" transform="translate(430 350)">
+              <path d="M -64,-20 C -74,-54 -42,-78 -4,-72 C 30,-67 60,-76 72,-42 C 84,-8 78,28 54,50
+                       C 30,72 -14,76 -42,58 C -68,42 -56,16 -64,-20 Z"
+                    fill="url(#mech-gPoi)" filter="url(#mech-sh)"/>
+              <path d="M -64,-20 C -74,-54 -42,-78 -4,-72 C 30,-67 60,-76 72,-42 C 84,-8 78,28 54,50
+                       C 30,72 -14,76 -42,58 C -68,42 -56,16 -64,-20 Z"
+                    fill="none" stroke="#565f98" stroke-width="1.6" opacity=".6"/>
+              <path d="M -28,-28 C -8,-44 22,-38 30,-16 C 38,6 24,26 2,28 C -20,30 -36,12 -32,-8 Z"
+                    fill="#ffffff" opacity=".06"/>
+              <ellipse cx="-26" cy="-36" rx="21" ry="12" fill="#ffffff" opacity=".17"
+                       transform="rotate(-20 -26 -36)"/>
+              <text class="mech-tag" y="10" font-size="26" fill="#eef0f7">POI</text>
+              <g id="mech-lys" transform="translate(66 -56)" opacity="0">
+                <circle r="14" fill="#141937" stroke="#dfee87" stroke-width="2.6"/>
+                <text class="mech-tag mech-tag-sm" y="5" font-size="14" fill="#dfee87">K</text>
+              </g>
+              <text class="mech-lbl" id="mech-poiLab" y="104">protein of interest</text>
+            </g>
+
+            <!-- K48-linked polyubiquitin chain -->
+            <path id="mech-bond" fill="none" stroke="#aeba57" stroke-width="5"
+                  stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+            <g id="mech-chain"></g>
+
+            <!-- the bifunctional peptide -->
+            <g id="mech-protac" transform="translate(575 350)">
+              <path d="M -95,0 L -62,-10 L -31,7 L 0,-7 L 31,8 L 62,-9 L 95,0"
+                    fill="none" stroke="#848dc6" stroke-width="7.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="-62" cy="-10" r="9.5" fill="url(#mech-gPep)"/>
+              <circle cx="-31" cy="7"   r="9.5" fill="url(#mech-gPep)"/>
+              <circle cx="0"   cy="-7"  r="9.5" fill="url(#mech-gPep)"/>
+              <circle cx="31"  cy="8"   r="9.5" fill="url(#mech-gPep)"/>
+              <circle cx="62"  cy="-9"  r="9.5" fill="url(#mech-gPep)"/>
+              <circle cx="-95" cy="0" r="18" fill="url(#mech-gPoi)" stroke="#b6c7d8"
+                      stroke-width="2.4" filter="url(#mech-shS)"/>
+              <circle cx="-99" cy="-6" r="6" fill="#ffffff" opacity=".32"/>
+              <circle cx="95" cy="0" r="18" fill="url(#mech-gE3)" stroke="#eef0f7"
+                      stroke-width="2" filter="url(#mech-shS)"/>
+              <circle cx="91" cy="-6" r="6" fill="#ffffff" opacity=".4"/>
+              <text class="mech-lbl" id="mech-protacLab" y="60">peptide PROTAC</text>
+            </g>
+
+            <!-- E3 ubiquitin ligase -->
+            <g id="mech-e3" transform="translate(748 340)">
+              <ellipse cx="0" cy="6" rx="78" ry="66" fill="url(#mech-gE3)" filter="url(#mech-sh)"/>
+              <ellipse cx="-50" cy="-26" rx="42" ry="36" fill="url(#mech-gE3)"/>
+              <ellipse cx="40" cy="-54" rx="37" ry="31" fill="url(#mech-gE3)"/>
+              <ellipse cx="0" cy="6" rx="78" ry="66" fill="none" stroke="#ffffff" stroke-width="1.5" opacity=".55"/>
+              <ellipse cx="-50" cy="-26" rx="42" ry="36" fill="none" stroke="#ffffff" stroke-width="1.5" opacity=".45"/>
+              <ellipse cx="40" cy="-54" rx="37" ry="31" fill="none" stroke="#ffffff" stroke-width="1.5" opacity=".45"/>
+              <ellipse cx="-22" cy="-10" rx="18" ry="11" fill="#ffffff" opacity=".3"
+                       transform="rotate(-18 -22 -10)"/>
+              <text class="mech-tag" y="18" font-size="24" fill="#1d2448">E3</text>
+              <text class="mech-lbl" id="mech-e3Lab" y="104">E3 ubiquitin ligase</text>
+            </g>
+
+            <!-- E2 conjugating enzyme, charged with ubiquitin -->
+            <g id="mech-e2" transform="translate(792 218)">
+              <ellipse rx="42" ry="37" fill="url(#mech-gE2)" filter="url(#mech-shS)"/>
+              <ellipse rx="42" ry="37" fill="none" stroke="#ffffff" stroke-width="1.4" opacity=".45"/>
+              <ellipse cx="-14" cy="-13" rx="14" ry="9" fill="#ffffff" opacity=".32"
+                       transform="rotate(-18 -14 -13)"/>
+              <text class="mech-tag" y="8" font-size="22" fill="#232a52">E2</text>
+              <g id="mech-e2ub" transform="translate(30 -46)">
+                <line x1="-10" y1="14" x2="-2" y2="6" stroke="#9aa34a" stroke-width="3.4" stroke-linecap="round"/>
+                <circle r="16" fill="url(#mech-gUb)" stroke="#f7f8ec" stroke-width="1.6"/>
+                <circle cx="-5" cy="-5" r="5" fill="#ffffff" opacity=".45"/>
+                <text class="mech-tag mech-tag-sm" y="5" font-size="12" fill="#2c3410">Ub</text>
+              </g>
+              <text class="mech-lbl" y="-92">E2 ~ Ub</text>
+            </g>
+
+            <!-- ubiquitin hand-off -->
+            <line id="mech-beam" stroke="#c3d45f" stroke-width="3.5" stroke-linecap="round"
+                  stroke-dasharray="4 8" opacity="0"/>
+
+            <!-- ternary complex highlight -->
+            <rect id="mech-halo" x="344" y="242" width="512" height="200" rx="100"
+                  fill="none" stroke="#848dc6" stroke-width="3" stroke-dasharray="11 13" opacity="0"/>
+          </g>
+        </svg>
+
+        <p class="mech-readout" id="mech-readout" aria-hidden="true"></p>
+      </div>
+
+      <ul class="mech-legend">
+        <li class="mech-chip" data-phases="12345"><span class="mech-swatch" style="background:#242b55"></span>Protein of interest</li>
+        <li class="mech-chip" data-phases="2345"><span class="mech-swatch" style="background:#848dc6"></span>Peptide PROTAC</li>
+        <li class="mech-chip" data-phases="345"><span class="mech-swatch" style="background:#b6c7d8"></span>E3 ligase</li>
+        <li class="mech-chip" data-phases="4"><span class="mech-swatch" style="background:#aab1de"></span>E2 &#126; Ub</li>
+        <li class="mech-chip" data-phases="45"><span class="mech-swatch" style="background:#dfee87"></span>Ubiquitin</li>
+        <li class="mech-chip" data-phases="5"><span class="mech-swatch" style="background:#8da1b9"></span>26S proteasome</li>
+      </ul>
+
+      <div class="mech-track" id="mech-track" role="group" aria-label="Mechanism steps"></div>
+
+      <div class="mech-foot">
+        <div class="mech-cap">
+          <p class="mech-cap-title"><span id="mech-capTitle">Target</span></p>
+          <p class="mech-cap-desc" id="mech-capDesc"></p>
+        </div>
+
+        <div class="mech-ctrls">
+          <span class="mech-sr" id="mech-capNum">01 / 05</span>
+          <button type="button" class="mech-btn" id="mech-prev" aria-label="Previous step">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 4.6 8 12l7.4 7.4 1.4-1.4L10.8 12l6-6z"/></svg>
+          </button>
+          <button type="button" class="mech-btn mech-btn-play" id="mech-play" aria-label="Play animation"></button>
+          <button type="button" class="mech-btn" id="mech-next" aria-label="Next step">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 4.6 16 12l-7.4 7.4-1.4-1.4L13.2 12l-6-6z"/></svg>
+          </button>
+          <button type="button" class="mech-btn" id="mech-restart" aria-label="Restart from step one">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <p class="mech-sr" id="mech-live" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       4 · SHAPING AETH3R
+       ===================================================================== -->
+  <section class="hm-band hm-shaping">
+    <img class="hm-wave hm-wave-top"
+         src="{{ 'https://static.igem.wiki/teams/6118/wiki/home/darkblue.svg' }}" alt="" aria-hidden="true">
+
+    <div class="hm-shaping-inner">
+      <h2 class="hm-band-title hm-band-title-light">Shaping Aeth3r</h2>
+      <p class="hm-band-lead hm-band-lead-light">Three strands of work that decided what the project became.</p>
+
+      <div class="hm-shaping-grid">
+        <a class="hm-shaping-item" href="{{ url_for('pages', page='results') }}">
+          <img class="hm-shaping-icon"
+               src="{{ 'https://static.igem.wiki/teams/6118/wiki/home/icon-target.svg' }}" alt="" aria-hidden="true">
+          <span class="hm-shaping-caption">Experimental target validation</span>
+          <span class="hm-shaping-more">Wet lab results</span>
+        </a>
+
+        <a class="hm-shaping-item" href="{{ url_for('pages', page='model') }}">
+          <img class="hm-shaping-icon"
+               src="{{ 'https://static.igem.wiki/teams/6118/wiki/home/icon-molecule.svg' }}" alt="" aria-hidden="true">
+          <span class="hm-shaping-caption">Structural and dynamic validation</span>
+          <span class="hm-shaping-more">Modelling</span>
+        </a>
+
+        <a class="hm-shaping-item" href="{{ url_for('pages', page='human-practices') }}">
+          <img class="hm-shaping-icon"
+               src="{{ 'https://static.igem.wiki/teams/6118/wiki/home/icon-people.svg' }}" alt="" aria-hidden="true">
+          <span class="hm-shaping-caption">Guided by experts</span>
+          <span class="hm-shaping-more">Human practices</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       5 · EXPLORE
+       ===================================================================== -->
+  <section class="hm-gallery">
+    <div class="hm-gallery-hero" id="gallery-hero">
+      <div class="hm-gallery-inner">
+        <p class="hm-gallery-eyebrow">Explore the wiki</p>
+        <h2 class="hm-gallery-title" id="gallery-title">Wet Lab</h2>
+        <a class="hm-gallery-link" id="gallery-readmore" href="{{ url_for('pages', page='results') }}">Read more</a>
+      </div>
+    </div>
+
+    <div class="hm-tiles" role="tablist" aria-label="Wiki sections">
+      <button type="button" class="hm-tile is-active" role="tab" aria-selected="true"
+              data-bg="{{ 'https://static.igem.wiki/teams/6118/wiki/home/wet-back.avif' }}"
+              data-title="Wet Lab"
+              data-link="{{ url_for('pages', page='results') }}">
+        <img src="{{ url_for('static', filename='home_images/wet_icon.jpg') }}" alt="" aria-hidden="true">
+        <span>Wet Lab</span>
+      </button>
+
+      <button type="button" class="hm-tile" role="tab" aria-selected="false"
+              data-bg="{{ 'https://static.igem.wiki/teams/6118/wiki/home/project-back.avif' }}"
+              data-title="Project"
+              data-link="{{ url_for('pages', page='description') }}">
+        <img src="{{ 'https://static.igem.wiki/teams/6118/wiki/home/project-icon.avif' }}" alt="" aria-hidden="true">
+        <span>Project</span>
+      </button>
+
+      <button type="button" class="hm-tile" role="tab" aria-selected="false"
+              data-bg="{{ 'https://static.igem.wiki/teams/6118/wiki/home/model-back.avif' }}"
+              data-title="Model"
+              data-link="{{ url_for('pages', page='model') }}">
+        <img src="{{ 'https://static.igem.wiki/teams/6118/wiki/home/model-icon.avif' }}" alt="" aria-hidden="true">
+        <span>Model</span>
+      </button>
+
+      <button type="button" class="hm-tile" role="tab" aria-selected="false"
+              data-bg="{{ 'https://static.igem.wiki/teams/6118/wiki/home/human-back.avif' }}"
+              data-title="Human Practices"
+              data-link="{{ url_for('pages', page='human-practices') }}">
+        <img src="{{ 'https://static.igem.wiki/teams/6118/wiki/home/human-icon.avif' }}" alt="" aria-hidden="true">
+        <span>Human Practices</span>
+      </button>
+
+      <button type="button" class="hm-tile" role="tab" aria-selected="false"
+              data-bg="{{ 'https://static.igem.wiki/teams/6118/wiki/home/edu-back.avif' }}"
+              data-title="Education"
+              data-link="{{ url_for('pages', page='education') }}">
+        <img src="{{ 'https://static.igem.wiki/teams/6118/wiki/home/edu-icon.avif' }}" alt="" aria-hidden="true">
+        <span>Education</span>
+      </button>
+    </div>
+  </section>
+
+</div>
+
+<script src="{{ url_for('static', filename='home.js') }}" defer></script>
+<script src="{{ url_for('static', filename='mechanism.js') }}" defer></script>
+{% endblock %}

@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Aeth3r — "How it works" mechanism explainer.
+   Self-contained: nothing here leaks outside .mech-section.
+   ========================================================================== */
+
+.mech-section{
+  --mc-cream:#fdfdf4;
+  --mc-parch:#f3f2ea;
+  --mc-powder:#b6c7d8;
+  --mc-lime:#dfee87;
+  --mc-wist:#848dc6;
+  --mc-indigo:#141937;
+  --mc-ink:#3b4066;
+  --mc-muted:#6b7196;
+  --mc-line:#14193718;
+
+  position:relative;
+  width:100%;
+  padding:clamp(3rem,6vw,6rem) clamp(1rem,4vw,3rem) clamp(3.5rem,7vw,6.5rem);
+  background:
+    radial-gradient(120% 70% at 50% 0%, #eef2f6 0%, rgba(238,242,246,0) 60%),
+    var(--mc-cream);
+  color:var(--mc-indigo);
+  overflow:hidden;
+}
+
+.mech-section *{box-sizing:border-box}
+
+/* ---------- heading ---------- */
+.mech-head{max-width:54rem;margin:0 auto clamp(2rem,4vw,3.25rem);text-align:center}
+.mech-eyebrow{
+  font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;
+  font-weight:700;color:var(--mc-wist);margin:0 0 .9rem;
+}
+.mech-title{
+  font-weight:700;color:var(--mc-indigo);margin:0 0 .85rem;
+  font-size:clamp(1.9rem,4vw,2.9rem);line-height:1.1;text-wrap:balance;
+}
+.mech-title em{font-style:italic;color:var(--mc-wist)}
+.mech-sub{
+  margin:0 auto;max-width:46rem;color:var(--mc-ink);
+  font-size:clamp(1rem,1.6vw,1.2rem);line-height:1.6;
+}
+
+/* ---------- shell ---------- */
+.mech-shell{width:min(1180px,100%);margin:0 auto}
+
+/* ---------- stage ---------- */
+.mech-stage{
+  position:relative;
+  border-radius:clamp(14px,1.6vw,22px);
+  overflow:hidden;
+  background:linear-gradient(165deg,#fbfaf4 0%,var(--mc-parch) 58%,#e9edf2 100%);
+  box-shadow:0 18px 44px -24px #14193766, 0 0 0 1px var(--mc-line);
+}
+.mech-svg{display:block;width:100%;height:auto;aspect-ratio:1200/560}
+
+/* live readout chip, floated over the stage */
+.mech-readout{
+  position:absolute;top:clamp(.6rem,1.6vw,1.1rem);right:clamp(.6rem,1.6vw,1.1rem);
+  display:inline-flex;align-items:center;gap:.5em;
+  padding:.45em .95em;border-radius:2em;
+  background:#ffffffe0;border:1px solid var(--mc-line);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  font-size:clamp(.6rem,1.15vw,.82rem);font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--mc-indigo);
+  opacity:0;transition:opacity .35s ease;pointer-events:none;
+  max-width:min(60%,22rem);
+}
+.mech-readout.is-on{opacity:1}
+.mech-readout::before{
+  content:"";width:.5em;height:.5em;border-radius:50%;
+  background:var(--mc-wist);flex:0 0 auto;
+}
+
+/* ---------- legend ---------- */
+.mech-legend{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:.45rem clamp(.4rem,1vw,.7rem);
+  margin:clamp(1rem,2vw,1.5rem) 0 clamp(1.5rem,3vw,2.25rem);
+  padding:0;list-style:none;
+}
+.mech-chip{
+  display:inline-flex;align-items:center;gap:.5em;
+  padding:.4em .85em;border-radius:2em;
+  background:#ffffffb3;border:1px solid var(--mc-line);
+  font-size:clamp(.68rem,1.15vw,.82rem);font-weight:600;
+  color:var(--mc-muted);
+  transition:color .3s ease,background .3s ease,border-color .3s ease,transform .3s ease;
+}
+.mech-chip .mech-swatch{
+  width:.72em;height:.72em;border-radius:50%;flex:0 0 auto;
+  box-shadow:inset 0 0 0 1px #14193726;
+  opacity:.45;transition:opacity .3s ease,transform .3s ease;
+}
+.mech-chip.is-on{
+  color:var(--mc-indigo);background:#fff;
+  border-color:#848dc655;transform:translateY(-1px);
+}
+.mech-chip.is-on .mech-swatch{opacity:1;transform:scale(1.15)}
+
+/* ---------- step track ---------- */
+.mech-track{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:clamp(.4rem,1vw,.85rem);margin-bottom:clamp(1.25rem,2.5vw,1.9rem);
+}
+.mech-step{
+  appearance:none;border:0;background:none;padding:.55rem 0 0;margin:0;
+  text-align:left;cursor:pointer;font:inherit;color:inherit;
+  display:flex;flex-direction:column;gap:.6rem;min-height:44px;
+  border-radius:8px;
+}
+.mech-rail{
+  height:4px;border-radius:4px;background:#b6c7d873;overflow:hidden;
+}
+.mech-fill{
+  height:100%;width:0;border-radius:4px;background:var(--mc-wist);
+  transition:width .08s linear;
+}
+.mech-step.is-done .mech-fill{background:#b0b7dd}
+.mech-step-lab{
+  display:flex;align-items:baseline;gap:.45em;
+  font-size:clamp(.62rem,1.1vw,.8rem);font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mc-muted);transition:color .3s ease;
+}
+.mech-step-lab b{color:#aeb4d2;font-weight:700;transition:color .3s ease}
+.mech-step:hover .mech-step-lab,
+.mech-step:focus-visible .mech-step-lab{color:var(--mc-indigo)}
+.mech-step.is-active .mech-step-lab{color:var(--mc-indigo)}
+.mech-step.is-active .mech-step-lab b{color:var(--mc-wist)}
+.mech-step:focus-visible{outline:3px solid var(--mc-wist);outline-offset:4px}
+
+/* ---------- caption + controls ---------- */
+.mech-foot{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:clamp(1rem,3vw,2.5rem);flex-wrap:wrap;
+}
+.mech-cap{flex:1 1 26rem;min-width:0}
+.mech-cap-title{
+  font-weight:700;font-size:clamp(1.15rem,2.1vw,1.55rem);
+  color:var(--mc-indigo);margin:0 0 .4rem;line-height:1.2;
+}
+.mech-cap-desc{
+  margin:0;color:var(--mc-ink);max-width:56ch;
+  font-size:clamp(.95rem,1.45vw,1.08rem);line-height:1.6;
+  min-height:3.2em;
+}
+
+.mech-ctrls{display:flex;align-items:center;gap:.55rem;flex:0 0 auto}
+.mech-btn{
+  appearance:none;border:1px solid var(--mc-line);background:#fff;
+  color:var(--mc-indigo);border-radius:50%;
+  width:44px;height:44px;display:grid;place-items:center;
+  cursor:pointer;padding:0;transition:border-color .18s ease,background .18s ease,transform .18s ease;
+}
+.mech-btn:hover{border-color:var(--mc-wist);transform:translateY(-2px)}
+.mech-btn:focus-visible{outline:3px solid var(--mc-wist);outline-offset:3px}
+.mech-btn svg{width:18px;height:18px;fill:currentColor;pointer-events:none}
+.mech-btn-play{
+  width:52px;height:52px;background:var(--mc-indigo);color:var(--mc-cream);
+  border-color:var(--mc-indigo);
+}
+.mech-btn-play:hover{background:#242c5c;border-color:#242c5c}
+.mech-btn-play svg{width:20px;height:20px}
+
+/* screen-reader-only live region */
+.mech-sr{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+
+/* ---------- SVG typography ---------- */
+.mech-svg .mech-tag{
+  font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-weight:700;text-anchor:middle;
+}
+.mech-svg .mech-lbl{
+  font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-weight:500;text-anchor:middle;fill:#3b4066;letter-spacing:.5px;
+  font-size:20px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .mech-track{grid-template-columns:repeat(5,minmax(0,1fr));gap:.35rem}
+  .mech-step-lab{flex-direction:column;gap:.1em;letter-spacing:.06em}
+}
+@media (max-width:760px){
+  /* mechanism.js crops the viewBox to match, so the art gets bigger instead
+     of smaller and the labels stay readable */
+  .mech-svg{aspect-ratio:756/452}
+  .mech-svg .mech-lbl{font-size:26px}
+  .mech-svg .mech-tag{font-size:30px}
+  .mech-svg .mech-tag-sm{font-size:15px}
+  .mech-foot{flex-direction:column;align-items:stretch}
+  /* flex-basis is the HEIGHT once this stacks, so reset it */
+  .mech-cap{flex:0 0 auto}
+  .mech-ctrls{justify-content:center;margin-top:.25rem}
+  .mech-cap-desc{min-height:0}
+}
+@media (max-width:560px){
+  .mech-track{grid-template-columns:repeat(5,minmax(0,1fr));gap:.3rem}
+  .mech-step-lab span{display:none}
+  .mech-step-lab b{font-size:.8rem;color:var(--mc-muted)}
+  .mech-step.is-active .mech-step-lab b{color:var(--mc-indigo)}
+  .mech-svg .mech-lbl{font-size:30px}
+  .mech-svg .mech-tag{font-size:34px}
+  .mech-svg .mech-tag-sm{font-size:16px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .mech-chip,.mech-btn,.mech-fill,.mech-readout{transition:none}
+}
